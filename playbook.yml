@@ -1,0 +1,19 @@
+- name: playground application
+  hosts: all
+  pre_tasks:
+    - name: Verify Minimum Ansible Version
+      assert:
+        that: "ansible_version.full is version_compare('2.10', '>=')"
+        msg: "You must update Ansible to at least 2.10"
+    - name: Check docker is installed
+      ansible.builtin.stat:
+        path: /usr/bin/docker
+      register: docker_stat
+    - name: Fail if docker is missing
+      ansible.builtin.fail:
+        msg: "/usr/bin/docker is required"
+      when: docker_stat.stat.exists == false
+
+  roles:
+    - { role: playground }
+  tags: playground

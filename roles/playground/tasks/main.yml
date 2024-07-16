@@ -1,0 +1,6 @@
+- name: Setting up directory for playground application
+  ansible.builtin.import_tasks: setup.yaml
+  tags:
+    - setup
+    - install
+

@@ -1,0 +1,8 @@
+- name: "Ensure containers directory: {{ container_directory }}"
+  ansible.builtin.file:
+    path: "{{ container_directory }}"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_gid | string }}"
+    mode: 0755
+    state: directory
+
